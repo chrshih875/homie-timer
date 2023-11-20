@@ -1,24 +1,22 @@
 import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import MyStopwatch from './stopWatch';
+import MyTimer from './useTimer';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <BrowserRouter>
+    <div>
+      <MyStopwatch />
     </div>
+    {/* <div className="container"> */}
+      {/* <Routes>
+        <Route path="/" element={<MyStopwatch/>} />
+        {/* <Route path="/timer" element={<MyTimer/>} /> */}
+      {/* </Routes> */} */}
+    {/* </div> */}
+</BrowserRouter>
   );
 }
 
