@@ -1,21 +1,15 @@
-import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import MyStopwatch from './stopWatch';
-import MyTimer from './useTimer';
+import Timer from './stopWatch';
 
 function App() {
   return (
     <BrowserRouter>
-    <div>
-      <MyStopwatch />
+    <div className="container">
+      <Routes>
+        <Route path="/" element={<Timer/>} />
+      </Routes>
     </div>
-    {/* <div className="container"> */}
-      {/* <Routes>
-        <Route path="/" element={<MyStopwatch/>} />
-        {/* <Route path="/timer" element={<MyTimer/>} /> */}
-      {/* </Routes> */} */}
-    {/* </div> */}
 </BrowserRouter>
   );
 }

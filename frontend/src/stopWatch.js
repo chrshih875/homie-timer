@@ -1,33 +1,46 @@
-import React from 'react';
-import { useStopwatch } from 'react-timer-hook';
+import React, { useState, useEffect } from 'react';
 
-function MyStopwatch() {
-  const {
-    totalSeconds,
-    seconds,
-    minutes,
-    hours,
-    days,
-    isRunning,
-    start,
-    pause,
-    reset,
-  } = useStopwatch({ autoStart: true });
+const Timer = () => {
+  const [seconds, setSeconds] = useState(135);
+  const [isActive, setIsActive] = useState(false);
 
+  useEffect(() => {
+    let interval;
+
+    if (isActive) {
+      interval = setInterval(() => {
+        setSeconds((prevSeconds) => prevSeconds + 1);
+      }, 1000);
+    } else {
+      clearInterval(interval);
+    }
+
+    return () => clearInterval(interval); // Cleanup the interval on component unmount or when isActive changes
+
+  }, [isActive]);
+
+  const startTimer = () => {
+    setIsActive(true);
+  };
+
+  const pauseTimer = () => {
+    setIsActive(false);
+  };
+
+  const resetTimer = () => {
+    setSeconds(0);
+    setIsActive(false);
+  };
 
   return (
-    <div style={{textAlign: 'center'}}>
-      <h1>react-timer-hook</h1>
-      <p>Stopwatch Demo</p>
-      <div style={{fontSize: '100px'}}>
-        <span>{days}</span>:<span>{hours}</span>:<span>{minutes}</span>:<span>{seconds}</span>
-      </div>
-      <p>{isRunning ? 'Running' : 'Not running'}</p>
-      <button onClick={start}>Start</button>
-      <button onClick={pause}>Pause</button>
-      <button onClick={reset}>Reset</button>
+    <div>
+      <h1>Timer</h1>
+      <p>{`${Math.floor(seconds / 60)}:${seconds % 60}`}</p>
+      <button onClick={startTimer}>Start</button>
+      <button onClick={pauseTimer}>Pause</button>
+      <button onClick={resetTimer}>Reset</button>
     </div>
   );
-}
+};
 
-export default MyStopwatch
+export default Timer;
